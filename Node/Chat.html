@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<html>
+<head>
+    <title>Socket.IO chat</title>
+    <style>
+        body {
+            font-family: 'Segoe UI';
+        }
+
+        #chatWindow {
+            max-height: 500px;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+        }
+
+        #myform {
+            position: fixed;
+            bottom: 10px;
+            margin-left: 15px;
+        }
+
+        #m {
+            height: 25px;
+            width: 400px;
+        }
+
+        button {
+            height: 31px;
+            width: 80px;
+        }
+
+        .m1 {
+            font-weight: bold;
+            font-size: large;
+        }
+
+        .m2 {
+            font-size: x-small;
+        }
+    </style>
+</head>
+<body>
+    <span class="m1">MAQ Group chat application</span>
+    <span class="m2">Type message in below text box and send, you are being monitored :P</span>
+    <div id="chatWindow">
+        <ul id="messages"></ul>
+    </div>
+
+    <form id="myform" action="">
+        <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+
+    <script>
+        var socket = io();
+        $('form').submit(function () {
+            var msg = $('#m').val();
+            if (!!msg && msg != '') {
+                socket.emit('chat message', $('#m').val());
+                $('#m').val('');
+            }
+            var chatwindow = document.getElementById('chatWindow');
+            chatwindow.scrollTop = chatwindow.scrollHeight;
+            return false;
+        });
+        socket.on('chat message', function (msg) {
+            $('#messages').append($('<li>').text(msg));
+            var chatwindow = document.getElementById('chatWindow');
+            chatwindow.scrollTop = chatwindow.scrollHeight;
+        });
+    </script>
+</body>
+</html>
