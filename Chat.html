@@ -67,7 +67,7 @@
     </style>
 </head>
 <body>
-    <span class="m1">Hello Friends</span>
+    <span class="m1">Welcome Friends</span>
     <div id="chatWindow">
         <ul id="messages"></ul>
     </div>
@@ -101,6 +101,7 @@
                         sessionStorage.setItem("uname", msg);
                         $("#getName").addClass("hidden");
                         $(".mask").addClass("hidden");
+                        $(".m1").text("Welcome "+msg);
                     }
                     return false;
                 });
@@ -108,6 +109,7 @@
                 socket.emit('nameEnter', ss);
                 $("#getName").addClass("hidden");
                 $(".mask").addClass("hidden");
+                $(".m1").text("Welcome "+ss);
             }
         })();
         $('form#myform').submit(function () {
