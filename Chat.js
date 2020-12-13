@@ -1,7 +1,7 @@
 ﻿var app = require('express')()
     , http = require('http').Server(app)
     , io = require('socket.io')(http)
-    , portnumner =  process.env.PORT || 5000
+    , portnumner =  5000
     , directory = process.cwd();
 app.get('/', function (req, res) {
     res.sendFile(directory + '/Chat.html');
@@ -23,6 +23,7 @@ io.on('connection', function (socket) {
 
 http.listen(portnumner, function () {
     console.log('listening on *: ' + portnumner);
+    console.log("env port"+ process.env.PORT);
 });
 
 function DisplayObject(obj) {
