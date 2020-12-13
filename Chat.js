@@ -12,12 +12,19 @@ app.get('/chat', function (req, res) {
 });
 
 io.on('connection', function (socket) {
+    var uName;
+    socket.on('nameEnter', function(msg){
+        uName = msg;
+        console.log(uName, ", entered in the room");
+    })
     socket.on('chat message', function (msg) {
         var address = socket.handshake.address.split('.');
         address = address[address.length - 1];
-        msg = address + ": " + msg;
+        uName = uName || address;
+        msg = uName + ": " + msg;
         io.emit('chat message', msg);
         console.log(msg);
+        // console.log(socket.handshake);
     });
 });
 

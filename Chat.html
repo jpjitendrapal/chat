@@ -43,6 +43,27 @@
             font-size: 20px;
             border: 2px solid black;
         }
+        .mask{
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            opacity: 0.4;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        #getName{
+            position: relative;
+            top: 120px;
+            padding: 20px;
+            border: 1px solid black;
+            background: white;
+            width: 300px;
+            margin: 0 auto;
+        }
+        .hidden{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -56,16 +77,43 @@
         <button class="btn">Send</button>
     </form>
 
+    <div class="mask hidden"></div>
+    <form id="getName" action="" class="hidden">
+        <label>Enter Your Name</label><br/>
+        <input id="name" class="name input" autocomplete="off" />
+        <button class="btn">Enter</button>
+    </form>
 
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
     <script>
         var socket = io();
-        $('form').submit(function () {
+        (function getName(){
+            var ss = sessionStorage.getItem("uname");
+            if(!ss){
+                $("#getName").removeClass("hidden");
+                $(".mask").removeClass("hidden");
+                $('form#getName').submit(function () {
+                    var msg = $('#name').val();
+                    if (!!msg && msg != '') {
+                        socket.emit('nameEnter', msg);
+                        sessionStorage.setItem("uname", msg);
+                        $("#getName").addClass("hidden");
+                        $(".mask").addClass("hidden");
+                    }
+                    return false;
+                });
+            } else {
+                socket.emit('nameEnter', ss);
+                $("#getName").addClass("hidden");
+                $(".mask").addClass("hidden");
+            }
+        })();
+        $('form#myform').submit(function () {
             var msg = $('#m').val();
             if (!!msg && msg != '') {
-                socket.emit('chat message', $('#m').val());
+                socket.emit('chat message', msg);
                 $('#m').val('');
             }
             var chatwindow = document.getElementById('chatWindow');
