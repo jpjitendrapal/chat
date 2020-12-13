@@ -1,7 +1,7 @@
 ﻿var app = require('express')()
     , http = require('http').Server(app)
     , io = require('socket.io')(http)
-    , portnumner = 3000
+    , portnumner =  process.env.PORT || 5000
     , directory = process.cwd();
 app.get('/', function (req, res) {
     res.sendFile(directory + '/Chat.html');
