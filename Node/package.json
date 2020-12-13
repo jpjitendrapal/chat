@@ -4,7 +4,8 @@
   "description": "just for poc",
   "main": "Hello.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node Chat.js"
   },
   "author": "jp",
   "license": "ISC",
