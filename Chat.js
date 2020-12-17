@@ -11,6 +11,10 @@ app.get('/chat', function (req, res) {
     res.sendFile(directory + '/Chat.html');
 });
 
+app.get('/new', function(req,res){
+    res.send("This is a new connection");
+})
+
 io.on('connection', function (socket) {
     var uName;
     socket.on('nameEnter', function(msg){
@@ -32,13 +36,3 @@ http.listen(portnumner, function () {
     console.log('listening on *: ' + portnumner);
     console.log("env port"+ process.env.PORT);
 });
-
-function DisplayObject(obj) {
-    for (key in obj) {
-        if (typeof obj[key] == "object") {
-            DisplayObject(obj[key]);
-        } else {
-            console.log(key + ': ' + obj[key]);
-        }
-    }
-}
