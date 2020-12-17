@@ -115,14 +115,14 @@
         $('form#myform').submit(function () {
             var msg = $('#m').val();
             if (!!msg && msg != '') {
-                socket.emit('chat message', msg);
+                socket.emit('chatMessage', msg);
                 $('#m').val('');
             }
             var chatwindow = document.getElementById('chatWindow');
             chatwindow.scrollTop = chatwindow.scrollHeight;
             return false;
         });
-        socket.on('chat message', function (msg) {
+        socket.on('chatMessage', function (msg) {
             $('#messages').append($('<li>').text(msg));
             var chatwindow = document.getElementById('chatWindow');
             chatwindow.scrollTop = chatwindow.scrollHeight;

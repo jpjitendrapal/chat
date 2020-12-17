@@ -17,12 +17,12 @@ io.on('connection', function (socket) {
         uName = msg;
         console.log(uName, ", entered in the room");
     })
-    socket.on('chat message', function (msg) {
+    socket.on('chatMessage', function (msg) {
         var address = socket.handshake.address.split('.');
         address = address[address.length - 1];
         uName = uName || address;
         msg = uName + ": " + msg;
-        io.emit('chat message', msg);
+        io.emit('chatMessage', msg);
         console.log(msg);
         // console.log(socket.handshake);
     });
