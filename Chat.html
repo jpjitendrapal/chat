@@ -122,8 +122,8 @@
             chatwindow.scrollTop = chatwindow.scrollHeight;
             return false;
         });
-        socket.on('chatMessage', function (msg) {
-            $('#messages').append($('<li>').text(msg));
+        socket.on('chatMessage', function (data) {
+            $('#messages').append($('<li>').text(data.to + ": " + data.msg));
             var chatwindow = document.getElementById('chatWindow');
             chatwindow.scrollTop = chatwindow.scrollHeight;
         });

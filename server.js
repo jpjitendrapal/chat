@@ -41,10 +41,6 @@ io.on('connection', function (socket) {
         console.log(uName, ", entered in the room");
     });
     socket.on('chatMessage', function (msg) {
-        var address = socket.handshake.address.split('.');
-        address = address[address.length - 1];
-        uName = uName || address;
-        msg = uName + ": " + msg;
         io.emit('chatMessage', {
                         to: uName,
                         msg: msg
