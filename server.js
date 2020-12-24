@@ -3,23 +3,25 @@
     , io = require('socket.io')(http)
     , portnumner = process.env.PORT || 5000
     , directory = process.cwd();
-app.get('/', function (req, res) {
-    // res.send("Hello");
-    res.sendFile(directory + '/Chat.html');
-});
 
-app.get('/chat', function (req, res) {
-    res.sendFile(directory + '/Chat.html');
-});
 
-app.get('/new', function(req,res){
-    res.send("This is a new connection");
-});
+    app.use("/public", express.static(path.join(__dirname, 'public')));
+    app.get('/', function(req, res){
+        res.sendFile(directory+ "/clientApp/index.html");
+    });
 
-app.get('/game/:id',function(req, res){
-    console.log(req.params);
-    res.sendFile(directory + "/multiPlayerGame/game.html");
-})
+    app.get('/chat', function (req, res) {
+        res.sendFile(directory + '/Chat.html');
+    });
+
+    app.get('/new', function(req,res){
+        res.send("This is a new connection");
+    });
+
+    app.get('/game/:id',function(req, res){
+        console.log(req.params);
+        res.sendFile(directory + "/multiPlayerGame/game.html");
+    })
 
 var connectedUsers={};
 
