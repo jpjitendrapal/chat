@@ -5,7 +5,7 @@
     , directory = process.cwd();
 
 
-    app.use("/public", express.static(path.join(__dirname, 'public')));
+    // app.use("/public", express.static(path.join(__dirname, 'public')));
     app.get('/', function(req, res){
         res.sendFile(directory+ "/clientApp/index.html");
     });
