@@ -6,8 +6,8 @@
 
 
     // app.use("/public", express.static(path.join(__dirname, 'public')));
-    app.get('/', function(req, res){
-        res.sendFile(directory+ "/clientApp/index.html");
+    app.get('/chat', function(req, res){
+        res.sendFile(directory+ "/Chat.html");
     });
 
     app.get('/chat', function (req, res) {
